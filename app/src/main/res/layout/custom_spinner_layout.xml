@@ -14,7 +14,7 @@
             android:id="@+id/ivSpinnerLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="5dp"
             android:src="@drawable/ic_settings_aplist" />
 
         <TextView
@@ -22,9 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Androchunk"
+            android:text="Actions"
             android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:textSize="10sp" />
 
     </LinearLayout>
 

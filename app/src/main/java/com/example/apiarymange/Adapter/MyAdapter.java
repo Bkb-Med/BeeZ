@@ -52,7 +52,7 @@ class ItemViewHolder extends RecyclerView.ViewHolder{
         pc2 = itemView.findViewById(R.id.prgs2);
         pc3 = itemView.findViewById(R.id.prgs3);
         pc4 = itemView.findViewById(R.id.prgs4);
-        apSpinner = itemView.findViewById(R.id.apiarySpinner);
+
     }
 }
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -121,14 +121,14 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
              Apiary apiary = apiaries.get(position);
               ItemViewHolder viewHolder =(ItemViewHolder)holder;
-             setSpinner(viewHolder);
+
              viewHolder.Reference.setText(apiary.getAppReference());
              viewHolder.Location.setText(apiary.getLocation());
              viewHolder.DateandTime.setText(apiary.getAppDate()+"  "+apiary.getAppTime());
 
              if(temperatures.size() == apiaries.size()){
              Temperature temperature = temperatures.get(position);
-             viewHolder.Temp.setText(temperature.getValue());}
+             viewHolder.Temp.setText(temperature.getValue()+"°C");}
              if(traffics.size() == apiaries.size()){
                  Traffic traffic = traffics.get(position);
                  viewHolder.Traffic.setText(traffic.getValue());}
@@ -157,7 +157,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemCount() {
         return apiaries.size();
     }
-    private void setSpinner( ItemViewHolder viewHolder){
+  /*  private void setSpinner( ItemViewHolder viewHolder){
         // Spinner click listener
         viewHolder.apSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -172,8 +172,16 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         });
 
+        ArrayList<CustomItemSpinner> customList;
+        customList = new ArrayList<>();
+        customList.add(new CustomItemSpinner("Actions", R.drawable.ic_settings_aplist));
+        customList.add(new CustomItemSpinner("Temp history", R.drawable.ic_temp));
+        customList.add(new CustomItemSpinner("Traffic history", R.drawable.ic_traffic));
+
+        SpinnerAdapter adapter = new SpinnerAdapter(activity.getApplicationContext(), customList);
+        viewHolder.apSpinner.setAdapter(adapter);
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
+       /* List<String> categories = new ArrayList<String>();
         categories.add("Item 1");
         categories.add("Item 2");
         categories.add("Item 3");
@@ -189,7 +197,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         // attaching data adapter to spinner
         viewHolder.apSpinner.setAdapter(dataAdapter);
-    }
+    }*/
     public void setLoaded() {
         isLoading = false;
     }

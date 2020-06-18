@@ -203,7 +203,7 @@
                 android:fontFamily="sans-serif"
                 android:text="Cancel"
                 android:textAllCaps="false"
-                android:textColor="@color/textColor"
+                android:textColor="@color/textGrey"
                 android:textSize="13sp" />
             <Button
                 android:id="@+id/btn_Add"

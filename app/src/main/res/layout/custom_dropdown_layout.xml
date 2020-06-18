@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="Actions"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/textGrey"
+        android:textSize="16sp" />
 
 </LinearLayout>
