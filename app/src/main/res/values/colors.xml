@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#EF832B</color>
+    <color name="honey1">#f0a500</color>
+    <color name="honey2">#cf7500</color>
+    <color name="greyhoney">#f4f4f4</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorOrange">#EF832B</color>
+    <color name="colorGreen">#06623B</color>
+    <color name="colorGreenlight">#649D66</color>
+    <color name="colorWhite">#FFFEFE</color>
+    <color name="colorYelow">#F6D743</color>
+    <color name="colorYelowlight">#F6F578</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yello">#ffb300</color>
+    <color name="green">#00bfa5</color>
+    <color name="colorAccent2">#FF4081</color>
+    <color name="darkblue">#00030D</color>
+    <color name="testcolorblue">#152b38</color>
+    <color name="pink">#fe104d</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="textColor">#6e6e6e</color>
+    <color name="editTextBG">#DADADA</color>
+</resources>
