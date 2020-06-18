@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.apiarymange.Adapter.MyAdapter;
 import com.example.apiarymange.Model.Apiary;
@@ -33,13 +34,17 @@ public class ListApiaries extends AppCompatActivity{
     List<Temperature> temperatures = new ArrayList<>();
     List<Traffic> traffics = new ArrayList<>();
     List<ListFrames> listFrames = new ArrayList<>();
+    ProgressBar mainProgress;
     MyAdapter adapter;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference("apiaries");
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listapiaries);
+        mainProgress = (ProgressBar) findViewById(R.id.mainProgressBar);
         setTemp();
         setTraffics();
         setFrames();
@@ -209,7 +214,7 @@ public class ListApiaries extends AppCompatActivity{
 
                             if (listFrames.size() > 0) {
                                 setAdapter();
-
+                                mainProgress.setVisibility(View.INVISIBLE);
                             }
                         }
 

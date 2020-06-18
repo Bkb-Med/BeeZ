@@ -5,13 +5,18 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apiarymange.Interface.ILoadMore;
+import com.example.apiarymange.ListApiaries;
 import com.example.apiarymange.Model.Apiary;
 import com.example.apiarymange.Model.Frame;
 import com.example.apiarymange.Model.Item;
@@ -29,6 +34,7 @@ import java.util.List;
 class ItemViewHolder extends RecyclerView.ViewHolder{
 
     public TextView Reference,Location,DateandTime,Temp,Traffic,fc1,fc2,fc3,fc4;
+    public Spinner apSpinner;
     public ProgressBar pc1,pc2,pc3,pc4;
     public ItemViewHolder(View itemView) {
         super(itemView);
@@ -46,6 +52,7 @@ class ItemViewHolder extends RecyclerView.ViewHolder{
         pc2 = itemView.findViewById(R.id.prgs2);
         pc3 = itemView.findViewById(R.id.prgs3);
         pc4 = itemView.findViewById(R.id.prgs4);
+        apSpinner = itemView.findViewById(R.id.apiarySpinner);
     }
 }
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -68,6 +75,11 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.temperatures = temperatures;
         this.traffics = traffics;
         this.listFrames = listFrames ;
+
+
+
+
+
         final LinearLayoutManager linearLayoutManager =(LinearLayoutManager) recyclerView.getLayoutManager();
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -106,8 +118,10 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
          if(holder instanceof ItemViewHolder){
+
              Apiary apiary = apiaries.get(position);
               ItemViewHolder viewHolder =(ItemViewHolder)holder;
+             setSpinner(viewHolder);
              viewHolder.Reference.setText(apiary.getAppReference());
              viewHolder.Location.setText(apiary.getLocation());
              viewHolder.DateandTime.setText(apiary.getAppDate()+"  "+apiary.getAppTime());
@@ -143,7 +157,39 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemCount() {
         return apiaries.size();
     }
+    private void setSpinner( ItemViewHolder viewHolder){
+        // Spinner click listener
+        viewHolder.apSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                //String ASIN = gameDataArr.get(position).getAmazonId();
+                System.out.println(parent.getId());     // <--- prints the same value for each item.
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        // Spinner Drop down elements
+        List<String> categories = new ArrayList<String>();
+        categories.add("Item 1");
+        categories.add("Item 2");
+        categories.add("Item 3");
+        categories.add("Item 4");
+        categories.add("Item 5");
+        categories.add("Item 6");
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(activity.getApplicationContext(), android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        viewHolder.apSpinner.setAdapter(dataAdapter);
+    }
     public void setLoaded() {
         isLoading = false;
     }

@@ -25,7 +25,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/honey1"
                 android:gravity="left"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <ImageView
                     android:layout_width="50dp"
@@ -70,6 +71,19 @@
                 android:layout_marginRight="12dp">
 
             </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/mainProgressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="120dp"
+                    android:indeterminateTint="@color/honey1" />
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_below="@+id/imageView1"
                 android:id="@+id/recycler"

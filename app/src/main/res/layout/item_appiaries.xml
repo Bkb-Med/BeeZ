@@ -116,10 +116,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <Spinner
+                    android:id="@+id/apiarySpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:dropDownWidth="30dp"
+                    android:dropDownWidth="wrap_content"
                     />
                 <RelativeLayout
                     android:layout_width="match_parent"
