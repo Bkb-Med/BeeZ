@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.apiarymange.Adapter.MyAdapter;
@@ -25,11 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ListApiaries extends AppCompatActivity{
-    FloatingActionButton btnAddnewApiary;
+    FloatingActionButton btnAddnewApiary,btnSync;
+    Button deletebtn;
     List<Apiary> apiaries = new ArrayList<>();
     List<Temperature> temperatures = new ArrayList<>();
     List<Traffic> traffics = new ArrayList<>();
@@ -49,6 +51,17 @@ public class ListApiaries extends AppCompatActivity{
         setTraffics();
         setFrames();
         btnAddnewApiary =findViewById(R.id.addnewApiary);
+        deletebtn =findViewById(R.id.deleteApiary);
+        deletebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("ap reference: "+MyAdapter.IdApiary);
+                ref.child(MyAdapter.IdApiary).removeValue();
+               // Toast.makeText(this, "position is :"+MyAdapter.IdApiary, Toast.LENGTH_LONG).show();
+                SyncDB();
+            }
+        });
+        btnSync=findViewById(R.id.SyncDB);
         btnAddnewApiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,10 +69,28 @@ public class ListApiaries extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-
+        btnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              SyncDB();
+            }
+        });
 
     }
+    private void SyncDB(){
+        mainProgress.setVisibility(View.VISIBLE);
+        apiaries.clear();
+        temperatures.clear();
+        traffics.clear();
+        listFrames.clear();
+        adapter.notifyDataSetChanged();
+        setTemp();
+        setTraffics();
+        setFrames();
+        LinearLayout menuLayout = findViewById(R.id.menulayout);
+        menuLayout.setVisibility(View.GONE);
 
+    }
     private void setTemp(){
         final String[] apReference = new String[1];
 
@@ -135,7 +166,6 @@ public class ListApiaries extends AppCompatActivity{
                             String TfTime = ds.child("TfTime").getValue(String.class);
                             String Tfvalue = ds.child("Tfvalue").getValue().toString();
                             tf[0] = new Traffic(idTf, Tfvalue, TfDate, TfTime);
-                            System.out.println("tf: " + tf[0]);
                             traffics.add(tf[0]);
 
                         }
@@ -210,11 +240,11 @@ public class ListApiaries extends AppCompatActivity{
                             frames.add(f4);
                             listFrames.add(new ListFrames(frames));
 
-                            System.out.println("frames: " + Arrays.toString(frames.toArray()));
+
 
                             if (listFrames.size() > 0) {
                                 setAdapter();
-                                mainProgress.setVisibility(View.INVISIBLE);
+                                mainProgress.setVisibility(View.GONE);
                             }
                         }
 
@@ -255,9 +285,8 @@ public class ListApiaries extends AppCompatActivity{
 
                 RecyclerView recycler = (RecyclerView)findViewById(R.id.recycler);
                 recycler.setLayoutManager(new LinearLayoutManager(ListApiaries.this));
-                adapter = new MyAdapter(recycler, ListApiaries.this,apiaries,temperatures,traffics,listFrames);
+                adapter = new MyAdapter(ListApiaries.this,apiaries,temperatures,traffics,listFrames);
                 recycler.setAdapter(adapter);
-
 
         }
 

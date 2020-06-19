@@ -2,13 +2,13 @@ package com.example.apiarymange.Adapter;
 
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,17 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apiarymange.Interface.ILoadMore;
-import com.example.apiarymange.ListApiaries;
 import com.example.apiarymange.Model.Apiary;
 import com.example.apiarymange.Model.Frame;
-import com.example.apiarymange.Model.Item;
 import com.example.apiarymange.Model.ListFrames;
 import com.example.apiarymange.Model.Temperature;
 import com.example.apiarymange.Model.Traffic;
 import com.example.apiarymange.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -34,10 +31,14 @@ import java.util.List;
 class ItemViewHolder extends RecyclerView.ViewHolder{
 
     public TextView Reference,Location,DateandTime,Temp,Traffic,fc1,fc2,fc3,fc4;
-    public Spinner apSpinner;
+    public RelativeLayout parentLayout;
+
+    //public Spinner apSpinner;
     public ProgressBar pc1,pc2,pc3,pc4;
     public ItemViewHolder(View itemView) {
         super(itemView);
+
+        parentLayout = itemView.findViewById(R.id.parentlayout);
         Reference = itemView.findViewById(R.id.txtapiaryreference);
         Location = itemView.findViewById(R.id.txtLocation);
         DateandTime = itemView.findViewById(R.id.txtDateandTime);
@@ -58,44 +59,21 @@ class ItemViewHolder extends RecyclerView.ViewHolder{
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int VIEW_TYPE_ITEM=0,VIEW_TYPE_LOADING=1;
-
+    public static String IdApiary;
     ILoadMore loadMore;
-    boolean isLoading;
     Activity activity;
     List<Apiary> apiaries;
     List<Traffic> traffics;
     List<Temperature> temperatures;
     List<ListFrames> listFrames ;
-    int visibleThreshold=5;
-    int lastVisibleItem,totalItemCount;
-
-    public MyAdapter(RecyclerView recyclerView,Activity activity,List<Apiary> apiaries,List<Temperature> temperatures,List<Traffic> traffics,    List<ListFrames> listFrames ) {
+    List<RelativeLayout> cardViewList = new ArrayList<>();
+    public MyAdapter(Activity activity, List<Apiary> apiaries, List<Temperature> temperatures, List<Traffic> traffics, List<ListFrames> listFrames) {
         this.activity = activity;
         this.apiaries = apiaries;
         this.temperatures = temperatures;
         this.traffics = traffics;
         this.listFrames = listFrames ;
-
-
-
-
-
-        final LinearLayoutManager linearLayoutManager =(LinearLayoutManager) recyclerView.getLayoutManager();
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                totalItemCount = linearLayoutManager.getItemCount();
-                lastVisibleItem=linearLayoutManager.findLastVisibleItemPosition();
-                if(!isLoading && totalItemCount <= (lastVisibleItem+visibleThreshold)){
-                    if(loadMore != null)
-                        loadMore.OnLoadMore();
-                        isLoading=true;
-                }
-
             }
-        });
-    }
     @Override
     public int getItemViewType(int position){
             return apiaries.get(position) == null ? VIEW_TYPE_LOADING:VIEW_TYPE_ITEM;
@@ -116,8 +94,33 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
          if(holder instanceof ItemViewHolder){
+
+             cardViewList.add(((ItemViewHolder) holder).parentLayout);
+             ((ItemViewHolder) holder).parentLayout.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                     for(RelativeLayout cardView : cardViewList){
+                         cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                     }
+                     //The selected card is set to colorSelected
+                     ((ItemViewHolder) holder).parentLayout.setBackgroundColor(Color.parseColor("#ededed"));
+                     Apiary apiary = apiaries.get(position);
+                     IdApiary = apiary.getAppReference();
+                     Toast.makeText(activity.getApplicationContext(), "position is :"+IdApiary, Toast.LENGTH_LONG).show();
+                     LinearLayout menuLayout =  (LinearLayout) activity.findViewById(R.id.menulayout);
+                      menuLayout.setVisibility(view.VISIBLE);
+
+
+                    /* Intent intent = new Intent(mContext, GalleryActivity.class);
+                     intent.putExtra("image_url", mImages.get(position));
+                     intent.putExtra("image_name", mImageNames.get(position));
+                     mContext.startActivity(intent);*/
+                 }
+             });
+
+
 
              Apiary apiary = apiaries.get(position);
               ItemViewHolder viewHolder =(ItemViewHolder)holder;
@@ -198,7 +201,5 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // attaching data adapter to spinner
         viewHolder.apSpinner.setAdapter(dataAdapter);
     }*/
-    public void setLoaded() {
-        isLoading = false;
-    }
+
 }
