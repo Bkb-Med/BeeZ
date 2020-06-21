@@ -4,22 +4,20 @@ package com.example.apiarymange.Model;
 
 public class Location {
 
-    private String Location;
+    private String apLocation;
 
     public Location() {
     }
 
-    public Location( String location) {
-
-        Location = location;
-
+    public Location(String apLocation) {
+        this.apLocation = apLocation;
     }
 
-    public String getLocation() {
-        return Location;
+    public String getApLocation() {
+        return apLocation;
     }
 
-    public void setLocation(String location) {
-        Location = location;
+    public void setApLocation(String apLocation) {
+        this.apLocation = apLocation;
     }
 }

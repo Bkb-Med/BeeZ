@@ -5,29 +5,29 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Apiary extends Location {
 
-    private String AppId;
+    private String apID;
     private String AppReference;
-    private String AppDate;
-    private String AppTime;
+    private String apDate;
+    private String apTime;
 
     public Apiary(){
 
     }
 
-    public Apiary(String locRefrence, String appId, String appReference, String appDate, String appTime) {
+    public Apiary(String locRefrence, String apID, String appReference, String appDate, String appTime) {
         super(locRefrence);
-        AppId = appId;
+        this.apID = apID;
         AppReference = appReference;
-        AppDate = appDate;
-        AppTime = appTime;
+        apDate = appDate;
+        apTime = appTime;
     }
 
-    public String getAppId() {
-        return AppId;
+    public String getApID() {
+        return apID;
     }
 
-    public void setAppId(String appId) {
-        AppId = appId;
+    public void setApID(String apID) {
+        this.apID = apID;
     }
 
     public String getAppReference() {
@@ -38,19 +38,19 @@ public class Apiary extends Location {
         AppReference = appReference;
     }
 
-    public String getAppDate() {
-        return AppDate;
+    public String getApDate() {
+        return apDate;
     }
 
-    public void setAppDate(String appDate) {
-        AppDate = appDate;
+    public void setApDate(String apDate) {
+        this.apDate = apDate;
     }
 
-    public String getAppTime() {
-        return AppTime;
+    public String getApTime() {
+        return apTime;
     }
 
-    public void setAppTime(String appTime) {
-        AppTime = appTime;
+    public void setApTime(String apTime) {
+        this.apTime = apTime;
     }
 }

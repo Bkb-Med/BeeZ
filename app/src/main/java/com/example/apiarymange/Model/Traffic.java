@@ -2,27 +2,27 @@ package com.example.apiarymange.Model;
 
 public class Traffic {
     private String trafficId;
-    private String value;
-    private String date;
-    private String time;
+    private String tfvalue;
+    private String tfDate;
+    private String tfTime;
 
     public Traffic() {
     }
 
-    public Traffic(String trafficId, String value, String date, String time) {
+    public Traffic(String trafficId, String tfvalue, String date, String tfTime) {
         this.trafficId = trafficId;
-        this.value = value;
-        this.date = date;
-        this.time = time;
+        this.tfvalue = tfvalue;
+        this.tfDate = date;
+        this.tfTime = tfTime;
     }
 
     @Override
     public String toString() {
         return "Traffic{" +
                 "trafficId='" + trafficId + '\'' +
-                ", value='" + value + '\'' +
-                ", date='" + date + '\'' +
-                ", time='" + time + '\'' +
+                ", value='" + tfvalue + '\'' +
+                ", date='" + tfDate + '\'' +
+                ", time='" + tfTime + '\'' +
                 '}';
     }
 
@@ -34,27 +34,27 @@ public class Traffic {
         this.trafficId = trafficId;
     }
 
-    public String getValue() {
-        return value;
+    public String getTfvalue() {
+        return tfvalue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setTfvalue(String tfvalue) {
+        this.tfvalue = tfvalue;
     }
 
-    public String getDate() {
-        return date;
+    public String getTfDate() {
+        return tfDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTfDate(String tfDate) {
+        this.tfDate = tfDate;
     }
 
-    public String getTime() {
-        return time;
+    public String getTfTime() {
+        return tfTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTfTime(String tfTime) {
+        this.tfTime = tfTime;
     }
 }

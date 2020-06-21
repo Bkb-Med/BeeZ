@@ -16,6 +16,7 @@
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -242,12 +243,18 @@
                 android:layout_height="60dp"
 
                 android:indeterminateTint="@color/honey1" />
-
+        <RelativeLayout
+            android:id="@+id/parentlaoutlist"
+            android:layout_below="@+id/menulayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_below="@+id/menulayout"
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+               </RelativeLayout>
+
+
 
 
         </RelativeLayout>

@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apiarymange.Interface.ILoadMore;
@@ -126,15 +125,15 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
               ItemViewHolder viewHolder =(ItemViewHolder)holder;
 
              viewHolder.Reference.setText(apiary.getAppReference());
-             viewHolder.Location.setText(apiary.getLocation());
-             viewHolder.DateandTime.setText(apiary.getAppDate()+"  "+apiary.getAppTime());
+             viewHolder.Location.setText(apiary.getApLocation());
+             viewHolder.DateandTime.setText(apiary.getApDate()+"  "+apiary.getApTime());
 
              if(temperatures.size() == apiaries.size()){
              Temperature temperature = temperatures.get(position);
-             viewHolder.Temp.setText(temperature.getValue()+"°C");}
+             viewHolder.Temp.setText(temperature.getTempvalue()+"°C");}
              if(traffics.size() == apiaries.size()){
                  Traffic traffic = traffics.get(position);
-                 viewHolder.Traffic.setText(traffic.getValue());}
+                 viewHolder.Traffic.setText(traffic.getTfvalue());}
              if(listFrames.size() == apiaries.size()){
                  ListFrames lf = listFrames.get(position);
                  List<Frame> frames = lf.getFrames();
@@ -184,22 +183,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         SpinnerAdapter adapter = new SpinnerAdapter(activity.getApplicationContext(), customList);
         viewHolder.apSpinner.setAdapter(adapter);
         // Spinner Drop down elements
-       /* List<String> categories = new ArrayList<String>();
-        categories.add("Item 1");
-        categories.add("Item 2");
-        categories.add("Item 3");
-        categories.add("Item 4");
-        categories.add("Item 5");
-        categories.add("Item 6");
 
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(activity.getApplicationContext(), android.R.layout.simple_spinner_item, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        viewHolder.apSpinner.setAdapter(dataAdapter);
     }*/
 
 }

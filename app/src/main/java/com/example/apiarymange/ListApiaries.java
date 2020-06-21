@@ -7,10 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.example.apiarymange.Adapter.MyAdapter;
 import com.example.apiarymange.Model.Apiary;
@@ -31,7 +35,8 @@ import java.util.List;
 
 public class ListApiaries extends AppCompatActivity{
     FloatingActionButton btnAddnewApiary,btnSync;
-    Button deletebtn;
+    Button deletebtn,cancelAdd;
+
     List<Apiary> apiaries = new ArrayList<>();
     List<Temperature> temperatures = new ArrayList<>();
     List<Traffic> traffics = new ArrayList<>();
@@ -47,9 +52,9 @@ public class ListApiaries extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listapiaries);
         mainProgress = (ProgressBar) findViewById(R.id.mainProgressBar);
-        setTemp();
-        setTraffics();
-        setFrames();
+       setTemp();
+       setTraffics();
+       setFrames();
         btnAddnewApiary =findViewById(R.id.addnewApiary);
         deletebtn =findViewById(R.id.deleteApiary);
         deletebtn.setOnClickListener(new View.OnClickListener() {
@@ -61,14 +66,16 @@ public class ListApiaries extends AppCompatActivity{
                 SyncDB();
             }
         });
-        btnSync=findViewById(R.id.SyncDB);
+
         btnAddnewApiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ListApiaries.this, Addappiary.class);
                 startActivity(intent);
+                finish();
             }
         });
+        btnSync=findViewById(R.id.SyncDB);
         btnSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +83,9 @@ public class ListApiaries extends AppCompatActivity{
             }
         });
 
+
     }
+
     private void SyncDB(){
         mainProgress.setVisibility(View.VISIBLE);
         apiaries.clear();
@@ -105,9 +114,9 @@ public class ListApiaries extends AppCompatActivity{
                         @Override
                         public void onChildAdded(DataSnapshot ds, String s) {
                             String idTemp = ds.getKey();
-                            String TempDate = ds.child("TempDate").getValue(String.class);
-                            String TempTime = ds.child("TempTime").getValue(String.class);
-                            String Tempvalue = ds.child("Tempvalue").getValue().toString();
+                            String TempDate = ds.child("tempDate").getValue(String.class);
+                            String TempTime = ds.child("tempTime").getValue(String.class);
+                            String Tempvalue = ds.child("tempvalue").getValue().toString();
                             temp[0] = new Temperature(idTemp,Tempvalue,TempDate,TempTime);
                             temperatures.add(temp[0]);
 
@@ -240,8 +249,6 @@ public class ListApiaries extends AppCompatActivity{
                             frames.add(f4);
                             listFrames.add(new ListFrames(frames));
 
-
-
                             if (listFrames.size() > 0) {
                                 setAdapter();
                                 mainProgress.setVisibility(View.GONE);
@@ -282,12 +289,10 @@ public class ListApiaries extends AppCompatActivity{
 
     }
     private void setAdapter(){
-
                 RecyclerView recycler = (RecyclerView)findViewById(R.id.recycler);
                 recycler.setLayoutManager(new LinearLayoutManager(ListApiaries.this));
                 adapter = new MyAdapter(ListApiaries.this,apiaries,temperatures,traffics,listFrames);
                 recycler.setAdapter(adapter);
-
         }
 
 }

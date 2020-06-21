@@ -2,18 +2,18 @@ package com.example.apiarymange.Model;
 
 public class Temperature {
     private String TempId;
-    private String Value;
-    private String date;
-    private String time;
+    private String Tempvalue;
+    private String TempDate;
+    private String TempTime;
 
     public Temperature() {
     }
 
-    public Temperature(String tempId, String value, String date, String time) {
+    public Temperature(String tempId, String tempvalue, String TempDate, String TempTime) {
         TempId = tempId;
-        Value = value;
-        this.date = date;
-        this.time = time;
+        Tempvalue = tempvalue;
+        this.TempDate = TempDate;
+        this.TempTime = TempTime;
     }
 
     public String getTempId() {
@@ -24,9 +24,9 @@ public class Temperature {
     public String toString() {
         return "Temperature{" +
                 "TempId='" + TempId + '\'' +
-                ", Value='" + Value + '\'' +
-                ", date='" + date + '\'' +
-                ", time='" + time + '\'' +
+                ", Value='" + Tempvalue + '\'' +
+                ", date='" + TempDate + '\'' +
+                ", time='" + TempTime + '\'' +
                 '}';
     }
 
@@ -34,27 +34,27 @@ public class Temperature {
         TempId = tempId;
     }
 
-    public String getValue() {
-        return Value;
+    public String getTempvalue() {
+        return Tempvalue;
     }
 
-    public void setValue(String value) {
-        Value = value;
+    public void setTempvalue(String tempvalue) {
+        Tempvalue = tempvalue;
     }
 
-    public String getDate() {
-        return date;
+    public String getTempDate() {
+        return TempDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTempDate(String tempDate) {
+        this.TempDate = tempDate;
     }
 
-    public String getTime() {
-        return time;
+    public String getTempTime() {
+        return TempTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTempTime(String tempTime) {
+        this.TempTime = tempTime;
     }
 }

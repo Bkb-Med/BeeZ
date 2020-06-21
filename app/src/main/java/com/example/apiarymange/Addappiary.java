@@ -1,94 +1,177 @@
 package com.example.apiarymange;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.apiarymange.Model.Item;
+import com.example.apiarymange.Adapter.Post;
+import com.example.apiarymange.Model.Apiary;
+import com.example.apiarymange.Model.Location;
+import com.example.apiarymange.Model.Temperature;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Addappiary extends AppCompatActivity {
-    public static final String ARTIST_NAME = "net.simplifiedcoding.firebasedatabaseexample.appid";
-    public static final String ARTIST_ID = "net.simplifiedcoding.firebasedatabaseexample.appreference";
-    EditText appRef,appLocation,appDate,appTime;
-    Spinner spinnerGenre;
-    Button buttonAdd;
-    ListView listViewArtists;
 
-    //a list to store all the artist from firebase database
-    List<Item> items;
+    EditText appRef,appDate,appTime;
+    Spinner appLocation;
+    Button buttonAdd,buttonCancel;
+    List<String> locationList = new ArrayList<>();
 
-    //our database reference object
     DatabaseReference DBAppiaries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addapiaries);
-
-        //getting the reference of artists node
-        DBAppiaries = FirebaseDatabase.getInstance().getReference("items");
-
+        fillSpinner();
         //getting views
         appRef = (EditText) findViewById(R.id.txtreference);
-        appLocation = (EditText) findViewById(R.id.txtlocation);
+        appLocation =  findViewById(R.id.txtlocation);
         appDate = (EditText) findViewById(R.id.txtDate);
         appTime = (EditText) findViewById(R.id.txtTime);
-        //spinnerGenre = (Spinner) findViewById(R.id.spinnerGenres);
-        //listViewArtists = (ListView) findViewById(R.id.listViewArtists);
 
         buttonAdd = (Button) findViewById(R.id.btn_Add);
 
-        //list to store artists
-        items = new ArrayList<>();
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //calling the method addArtist()
                 //the method is defined below
                 //this method is actually performing the write operation
-                addAppiary();
+                addAppiary() ;
+
             }
         });
     }
+    private void fillSpinner(){
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("locations");
+
+        locationList.add("Location :");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        String location = ds.getValue(String.class);
+                        locationList.add(location);
+                }
+                if(locationList.size()>0){
+                       ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, locationList){
+                            // Disable click item < month current
+                            @Override
+                            public boolean isEnabled(int position) {
+                                // TODO Auto-generated method stub
+                                if (position ==0) {
+                                    return false;
+                                }
+                                return true;
+                            }};
+
+                        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+                        appLocation.setAdapter(dataAdapter);}
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+
+
+    }
 
     private void addAppiary() {
-        //getting the values to save
-        String reference = appRef.getText().toString().trim();
-        String location = appLocation.getText().toString().trim();
-        String date = appDate.getText().toString().trim();
-        String time = appTime.getText().toString().trim();
-        //checking if the value is provided
+        DBAppiaries = FirebaseDatabase.getInstance().getReference("apiaries");
+        final String reference = appRef.getText().toString().trim();
+        final String location = appLocation.getSelectedItem().toString();
+        final String date = appDate.getText().toString().trim();
+        final String time = appTime.getText().toString().trim();
+        final List<String> refrences = new ArrayList<>();
+
         if (!TextUtils.isEmpty(reference)) {
+            DBAppiaries.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        String apRefrence = ds.getKey();
+                        refrences.add(apRefrence);
+                        }
+                    if(refrences.contains(reference)){
 
-            //getting a unique id using push().getKey() method
-            //it will create a unique id and we will use it as the Primary Key for our Artist
-            String id = DBAppiaries.push().getKey();
 
-            //creating an Artist Object
-           // Appiary appiary = new Appiary(id,reference,location,date,time);
-            Item item = new Item(reference,location.length());
-            //Saving the Artist
-            DBAppiaries.child(id).setValue(item);
+                        Toast.makeText(getApplicationContext(), "apiary already exist", Toast.LENGTH_LONG).show();
 
-            //setting edittext to blank again
+                    }else {
+
+                        String id = DBAppiaries.push().getKey();
+
+                        Post post = new Post(id,date,time,location,reference);
+                        Map<String, Object> postValues = post.toMap();
+
+                        Map<String, Object> childUpdates = new HashMap<>();
+                        childUpdates.put(reference, postValues);
+
+                        DBAppiaries.updateChildren(childUpdates);
+                        childUpdates.clear();
+                        childUpdates.put(reference+"/Temperature/"+"0x000"+"/"+"tempvalue", "-");
+                        DBAppiaries.updateChildren(childUpdates);
+                        childUpdates.clear();
+                        childUpdates.put(reference+"/Traffic/"+"0x000"+"/"+"Tfvalue", 0);
+                        DBAppiaries.updateChildren(childUpdates);
+                        childUpdates.clear();
+                        childUpdates.put(reference+"/frames/"+"0x000"+"/"+"C1progress", 0);
+                        childUpdates.put(reference+"/frames/"+"0x000"+"/"+"C2progress", 0);
+                        childUpdates.put(reference+"/frames/"+"0x000"+"/"+"C3progress", 0);
+                        childUpdates.put(reference+"/frames/"+"0x000"+"/"+"C4progress", 0);
+                        DBAppiaries.updateChildren(childUpdates);
+                        Toast.makeText(getApplicationContext(), "appiary added", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Addappiary.this, ListApiaries.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+
+            });
+
+
             appRef.setText("");
-            appLocation.setText("");
+            appLocation.setSelection(0);
             appDate.setText("");
             appTime.setText("");
             //displaying a success toast
-            Toast.makeText(this, "appiary added", Toast.LENGTH_LONG).show();
+
         } else {
             //if the value is not given displaying a toast
             Toast.makeText(this, "Please enter a reference", Toast.LENGTH_LONG).show();
+
         }
+
     }
 }
 
