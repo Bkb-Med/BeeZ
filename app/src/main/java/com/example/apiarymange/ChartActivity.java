@@ -59,6 +59,7 @@ public class ChartActivity extends AppCompatActivity {
         comChart.getDescription().setEnabled(false);
         comChart.setGridBackgroundColor(Color.rgb(240,240,240));
         comChart.getAxisLeft().setDrawGridLines(false);
+        comChart.getAxisRight().setDrawGridLines(false);
         comChart.getXAxis().setDrawGridLines(false);
       /*  XAxis x = comChart.getXAxis();
         x.setTextSize(14f);
@@ -79,7 +80,7 @@ public class ChartActivity extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ChartActivity.this, ListApiaries.class);
+                Intent intent = new Intent(ChartActivity.this, MainDashboard.class);
                 startActivity(intent);
                 finish();
             }
@@ -88,6 +89,9 @@ public class ChartActivity extends AppCompatActivity {
         apReference.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+             temperatures.clear();
+             labels.clear();
+             traffics.clear();
             SetItemVizTemp(apReference.getSelectedItem().toString());
             SetItemVizTraffic(apReference.getSelectedItem().toString());
 
@@ -140,9 +144,7 @@ public class ChartActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     i[0]++;
-                    String idTraffic = ds.getKey();
-                    String TfDate = ds.child("TfDate").getValue(String.class);
-                    String TfTime = ds.child("TfTime").getValue(String.class);
+
                     Long Tfvalue = (Long) ds.child("Tfvalue").getValue();
                     traffics.add(new BarEntry(i[0],Tfvalue));
 
@@ -152,11 +154,11 @@ public class ChartActivity extends AppCompatActivity {
 
                 XAxis xAxis = comChart.getXAxis();
                 xAxis.setGranularity(1f);
-                xAxis.setCenterAxisLabels(true);
+              //xAxis.setCenterAxisLabels(true);
                 xAxis.setLabelRotationAngle(-90);
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
-                YAxis y = comChart.getAxisLeft();
+                YAxis y = comChart.getAxisRight();
                 y.setEnabled(false);
 
                 LineDataSet lineDataSet = new LineDataSet(temperatures,"Temperature");
@@ -226,23 +228,5 @@ public class ChartActivity extends AppCompatActivity {
 
 
     }
-private ArrayList<Entry> lineChartDataSet(){
-        ArrayList<Entry> dataset = new ArrayList<Entry>();
-        dataset.add(new Entry(0,10));
-        dataset.add(new Entry(1,20));
-        dataset.add(new Entry(2,50));
-        dataset.add(new Entry(3,-4));
-        dataset.add(new Entry(4,0));
-        return dataset;
-        }
 
-    private ArrayList<BarEntry> barChartDataSet(){
-        ArrayList<BarEntry> dataset = new ArrayList<>();
-        dataset.add(new BarEntry(0,140f));
-        dataset.add(new BarEntry(1,135f));
-        dataset.add(new BarEntry(2,145f));
-        dataset.add(new BarEntry(3,160f));
-        dataset.add(new BarEntry(4,110f));
-        return dataset;
-    }
 }

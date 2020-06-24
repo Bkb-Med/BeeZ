@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.apiarymange.Adapter.TempAdapter;
 import com.example.apiarymange.Adapter.TrafficAdapter;
 import com.example.apiarymange.Model.Traffic;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,7 +38,7 @@ public class ListTraffic extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listapweights);
+        setContentView(R.layout.activity_listtraffic);
         Intent intent = getIntent();
         apref = intent.getStringExtra("apreference");
         setTemp();

@@ -7,6 +7,7 @@ import android.view.Menu;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,7 +19,8 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainDashboard extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
+
+    private DrawerLayout drawer;
 
     CardView manageApp,dataViz;
     @Override
@@ -27,20 +29,16 @@ public class MainDashboard extends AppCompatActivity {
 
         setContentView(R.layout.activity_main_dashboard);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Main Dashboard");
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
-        dataViz = findViewById(R.id.dataviz);
+        drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+       dataViz = findViewById(R.id.dataviz);
         dataViz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,10 +63,5 @@ public class MainDashboard extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+
 }

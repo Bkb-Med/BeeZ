@@ -25,15 +25,12 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ListApiaries"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Addappiary"
             android:parentActivityName=".ListApiaries" />
         <activity
             android:name=".Login"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".Dashboard"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Editapiary"

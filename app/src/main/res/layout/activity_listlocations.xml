@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/darkblue"
                 android:gravity="left"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <ImageView
                     android:layout_width="50dp"
@@ -34,32 +35,18 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/chart" />
+                    android:src="@drawable/marker" />
 
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="0dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="Data visualisation"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
-
-                    <Spinner
-                        android:id="@+id/vizspinner"
-                        android:layout_width="190dp"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="18dp"
-                        android:backgroundTint="@color/greyhoney" />
-                </LinearLayout>
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Locations"
+                    android:textColor="@color/white"
+                    android:textSize="28sp" />
 
             </LinearLayout>
 
@@ -76,7 +63,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/vizback"
+                    android:id="@+id/addnewlocation"
                     android:layout_gravity="center"
                     app:fabCustomSize="30dp"
                     android:foregroundGravity="center"
@@ -84,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/darkblue"
                     app:borderWidth="0dp"
-                    android:src="@drawable/ic_arrow_back"
+                    android:src="@drawable/ic_add_ap"
                     android:elevation="10dp"
                     app:fabSize="normal"
                     >
@@ -93,9 +80,7 @@
             </LinearLayout>
 
 
-
             <ProgressBar
-                android:visibility="gone"
                 android:layout_below="@+id/linearLayout1"
                 android:id="@+id/mainProgressBar"
                 android:layout_width="match_parent"
@@ -107,12 +92,10 @@
                 android:layout_below="@+id/linearLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <com.github.mikephil.charting.charts.CombinedChart
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerlocation"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:id="@+id/combinedchart"
-                    tools:ignore="MissingConstraints" />
+                    android:layout_height="match_parent"/>
             </RelativeLayout>
 
 
