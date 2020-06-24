@@ -2,25 +2,35 @@ package com.example.apiarymange.Adapter;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.apiarymange.Addappiary;
+import com.example.apiarymange.Editapiary;
 import com.example.apiarymange.Interface.ILoadMore;
+import com.example.apiarymange.ListApiaries;
+import com.example.apiarymange.ListTemperature;
+import com.example.apiarymange.ListTraffic;
 import com.example.apiarymange.Model.Apiary;
 import com.example.apiarymange.Model.Frame;
 import com.example.apiarymange.Model.ListFrames;
 import com.example.apiarymange.Model.Temperature;
 import com.example.apiarymange.Model.Traffic;
 import com.example.apiarymange.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +42,7 @@ class ItemViewHolder extends RecyclerView.ViewHolder{
     public TextView Reference,Location,DateandTime,Temp,Traffic,fc1,fc2,fc3,fc4;
     public RelativeLayout parentLayout;
 
-    //public Spinner apSpinner;
+    public Spinner apSpinner;
     public ProgressBar pc1,pc2,pc3,pc4;
     public ItemViewHolder(View itemView) {
         super(itemView);
@@ -52,20 +62,21 @@ class ItemViewHolder extends RecyclerView.ViewHolder{
         pc2 = itemView.findViewById(R.id.prgs2);
         pc3 = itemView.findViewById(R.id.prgs3);
         pc4 = itemView.findViewById(R.id.prgs4);
-
+        apSpinner = itemView.findViewById(R.id.apSpinner);
     }
 }
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int VIEW_TYPE_ITEM=0,VIEW_TYPE_LOADING=1;
     public static String IdApiary;
-    ILoadMore loadMore;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference("apiaries");
     Activity activity;
     List<Apiary> apiaries;
     List<Traffic> traffics;
     List<Temperature> temperatures;
     List<ListFrames> listFrames ;
-    List<RelativeLayout> cardViewList = new ArrayList<>();
+    //List<RelativeLayout> cardViewList = new ArrayList<>();
     public MyAdapter(Activity activity, List<Apiary> apiaries, List<Temperature> temperatures, List<Traffic> traffics, List<ListFrames> listFrames) {
         this.activity = activity;
         this.apiaries = apiaries;
@@ -78,9 +89,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return apiaries.get(position) == null ? VIEW_TYPE_LOADING:VIEW_TYPE_ITEM;
     }
 
-    public void setLoadMore(ILoadMore loadMore) {
-        this.loadMore = loadMore;
-    }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
@@ -96,33 +105,65 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
          if(holder instanceof ItemViewHolder){
 
-             cardViewList.add(((ItemViewHolder) holder).parentLayout);
-             ((ItemViewHolder) holder).parentLayout.setOnClickListener(new View.OnClickListener() {
+             final Apiary apiary = apiaries.get(position);
+             ItemViewHolder viewHolder =(ItemViewHolder)holder;
+             viewHolder.apSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                  @Override
-                 public void onClick(View view) {
-                     for(RelativeLayout cardView : cardViewList){
-                         cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                 public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                     switch (position){
+                         case 1:
+                             Intent intent1 = new Intent(activity.getApplicationContext(), ListTemperature.class);
+                             intent1.putExtra("apreference", apiary.getAppReference());
+                             activity.startActivity(intent1);
+                             activity.finish();
+                             break;
+                         case 2:
+                             Intent intent2 = new Intent(activity.getApplicationContext(), ListTraffic.class);
+                             intent2.putExtra("apreference", apiary.getAppReference());
+                             activity.startActivity(intent2);
+                             activity.finish();
+                             break;
+                         case 3:
+                             Intent intent3 = new Intent(activity.getApplicationContext(), Editapiary.class);
+                             intent3.putExtra("apreference", apiary.getAppReference());
+                             activity.startActivity(intent3);
+                             activity.finish();
+                             break;
+                         case 4:
+                             ref.child(apiary.getAppReference()).removeValue();
+                             Toast.makeText(activity.getApplicationContext(), "Apiary successfully removed ", Toast.LENGTH_LONG).show();
+                             Intent intent = new Intent(activity.getApplicationContext(), ListApiaries.class);
+                             activity.startActivity(intent);
+                             activity.finish();
+                             break;
                      }
-                     //The selected card is set to colorSelected
-                     ((ItemViewHolder) holder).parentLayout.setBackgroundColor(Color.parseColor("#ededed"));
-                     Apiary apiary = apiaries.get(position);
-                     IdApiary = apiary.getAppReference();
-                     Toast.makeText(activity.getApplicationContext(), "position is :"+IdApiary, Toast.LENGTH_LONG).show();
-                     LinearLayout menuLayout =  (LinearLayout) activity.findViewById(R.id.menulayout);
-                      menuLayout.setVisibility(view.VISIBLE);
 
+                 }
 
-                    /* Intent intent = new Intent(mContext, GalleryActivity.class);
-                     intent.putExtra("image_url", mImages.get(position));
-                     intent.putExtra("image_name", mImageNames.get(position));
-                     mContext.startActivity(intent);*/
+                 @Override
+                 public void onNothingSelected(AdapterView<?> adapterView) {
+
                  }
              });
+             ArrayList<CustomItemSpinner> customList;
+             customList = new ArrayList<>();
+             customList.add(new CustomItemSpinner("Actions", R.drawable.ic_settings_aplist));
+             customList.add(new CustomItemSpinner("Temp history", R.drawable.ic_filter_drama_black));
+             customList.add(new CustomItemSpinner("Traffic history", R.drawable.ic_import_export_black));
+             customList.add(new CustomItemSpinner("Edit", R.drawable.ic_edit_black));
+             customList.add(new CustomItemSpinner("Delete", R.drawable.ic_delete_black));
+             SpinnerAdapter adapter = new SpinnerAdapter(activity.getApplicationContext(), customList){
+             @Override
+             public boolean isEnabled(int position) {
+                 // TODO Auto-generated method stub
+                 if (position ==0) {
+                     return false;
+                 }
+                 return true;
+             }};
+             viewHolder.apSpinner.setAdapter(adapter);
+             viewHolder.apSpinner.setSelection(0);
 
-
-
-             Apiary apiary = apiaries.get(position);
-              ItemViewHolder viewHolder =(ItemViewHolder)holder;
 
              viewHolder.Reference.setText(apiary.getAppReference());
              viewHolder.Location.setText(apiary.getApLocation());
@@ -185,5 +226,24 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // Spinner Drop down elements
 
     }*/
+/*
+             cardViewList.add(((ItemViewHolder) holder).parentLayout);
+             ((ItemViewHolder) holder).parentLayout.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                     for(RelativeLayout cardView : cardViewList){
+                         cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                     }
+                     //The selected card is set to colorSelected
+                     ((ItemViewHolder) holder).parentLayout.setBackgroundColor(Color.parseColor("#ededed"));
+                     Apiary apiary = apiaries.get(position);
+                     IdApiary = apiary.getAppReference();
 
+                     LinearLayout menuLayout =  (LinearLayout) activity.findViewById(R.id.menulayout);
+                      menuLayout.setVisibility(view.VISIBLE);
+
+
+
+                 }
+             });*/
 }

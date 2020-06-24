@@ -20,7 +20,7 @@ public class MainDashboard extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    CardView manageApp;
+    CardView manageApp,dataViz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,14 @@ public class MainDashboard extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        dataViz = findViewById(R.id.dataviz);
+        dataViz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainDashboard.this, ChartActivity.class);
+                startActivity(intent);
+            }
+        });
         manageApp = findViewById(R.id.manageApiary);
         manageApp.setOnClickListener(new View.OnClickListener() {
             @Override

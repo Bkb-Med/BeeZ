@@ -107,137 +107,9 @@
                 </com.google.android.material.floatingactionbutton.FloatingActionButton>
             </LinearLayout>
 
-            <LinearLayout
-                android:visibility="visible"
-                android:layout_marginTop="10dp"
-                android:id="@+id/menulayout"
-                android:layout_below="@+id/linearLayout1"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-
-                <LinearLayout
-                android:id="@+id/ln2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/linearLayout1"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/deleteApiary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:backgroundTint="@color/pink"
-                    android:textColor="@color/white"
-                    android:textAllCaps="false"
-                    android:textSize="18sp"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="10dp"
-                    android:text="Delete"
-                    app:borderWidth="0dp"
-                    android:elevation="6dp"
-                    android:layout_gravity="center"
-                    android:gravity="center_horizontal|top"
-                    android:background="@drawable/delete_btn"
-                    >
-
-                </Button>
-            </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ln3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/linearLayout1"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/EditApiary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:backgroundTint="@color/yello"
-                        android:textColor="@color/white"
-                        android:textAllCaps="false"
-                        android:textSize="18sp"
-                        android:paddingTop="5dp"
-                        android:paddingLeft="10dp"
-                        android:text="Edit"
-                        app:borderWidth="0dp"
-                        android:elevation="6dp"
-                        android:layout_gravity="center"
-                        android:gravity="center_horizontal|top"
-                        android:background="@drawable/delete_btn"
-                        >
-
-                    </Button>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ln4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/linearLayout1"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/hisTemp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:backgroundTint="@color/colorAccent"
-                        android:textColor="@color/white"
-                        android:textAllCaps="false"
-                        android:textSize="18sp"
-                        android:paddingTop="5dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="Temperature"
-                        app:borderWidth="0dp"
-                        android:elevation="6dp"
-                        android:layout_gravity="center"
-                        android:gravity="center_horizontal|top"
-                        android:background="@drawable/delete_btn"
-                        >
-
-                    </Button>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ln5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/linearLayout1"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/hisTraffic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:backgroundTint="@color/colorAccent2"
-                        android:textColor="@color/white"
-                        android:textAllCaps="false"
-                        android:textSize="18sp"
-                        android:paddingTop="5dp"
-                        android:paddingLeft="10dp"
-                        android:text="Traffic"
-                        app:borderWidth="0dp"
-                        android:elevation="6dp"
-                        android:layout_gravity="center"
-                        android:gravity="center_horizontal|top"
-                        android:background="@drawable/delete_btn"
-                        >
-
-                    </Button>
-                </LinearLayout>
-            </LinearLayout>
             <ProgressBar
-                android:layout_below="@+id/menulayout"
+                android:layout_below="@+id/linearLayout1"
                 android:id="@+id/mainProgressBar"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -245,7 +117,7 @@
                 android:indeterminateTint="@color/honey1" />
         <RelativeLayout
             android:id="@+id/parentlaoutlist"
-            android:layout_below="@+id/menulayout"
+            android:layout_below="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.recyclerview.widget.RecyclerView

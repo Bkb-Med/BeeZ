@@ -9,6 +9,7 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.apiarymange.Adapter.DateInputMask;
 import com.example.apiarymange.Adapter.Post;
 import com.example.apiarymange.Model.Apiary;
 import com.example.apiarymange.Model.Location;
@@ -28,6 +29,7 @@ import java.util.Map;
 public class Addappiary extends AppCompatActivity {
 
     EditText appRef,appDate,appTime;
+
     Spinner appLocation;
     Button buttonAdd,buttonCancel;
     List<String> locationList = new ArrayList<>();
@@ -38,11 +40,14 @@ public class Addappiary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addapiaries);
+
         fillSpinner();
         //getting views
         appRef = (EditText) findViewById(R.id.txtreference);
+
         appLocation =  findViewById(R.id.txtlocation);
         appDate = (EditText) findViewById(R.id.txtDate);
+        DateInputMask dtip =new DateInputMask(appDate);
         appTime = (EditText) findViewById(R.id.txtTime);
 
         buttonAdd = (Button) findViewById(R.id.btn_Add);

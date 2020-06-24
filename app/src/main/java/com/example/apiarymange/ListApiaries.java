@@ -35,7 +35,7 @@ import java.util.List;
 
 public class ListApiaries extends AppCompatActivity{
     FloatingActionButton btnAddnewApiary,btnSync;
-    Button deletebtn,cancelAdd;
+
 
     List<Apiary> apiaries = new ArrayList<>();
     List<Temperature> temperatures = new ArrayList<>();
@@ -55,18 +55,8 @@ public class ListApiaries extends AppCompatActivity{
        setTemp();
        setTraffics();
        setFrames();
-        btnAddnewApiary =findViewById(R.id.addnewApiary);
-        deletebtn =findViewById(R.id.deleteApiary);
-        deletebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("ap reference: "+MyAdapter.IdApiary);
-                ref.child(MyAdapter.IdApiary).removeValue();
-               // Toast.makeText(this, "position is :"+MyAdapter.IdApiary, Toast.LENGTH_LONG).show();
-                SyncDB();
-            }
-        });
 
+        btnAddnewApiary =findViewById(R.id.addnewApiary);
         btnAddnewApiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,8 +86,7 @@ public class ListApiaries extends AppCompatActivity{
         setTemp();
         setTraffics();
         setFrames();
-        LinearLayout menuLayout = findViewById(R.id.menulayout);
-        menuLayout.setVisibility(View.GONE);
+
 
     }
     private void setTemp(){

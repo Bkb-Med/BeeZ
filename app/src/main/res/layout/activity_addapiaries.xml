@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
+    android:background="@drawable/dashboard"
     >
 
     <androidx.cardview.widget.CardView
@@ -42,7 +43,7 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Add Appiary"
+                    android:text="Add Apiary"
                     android:textColor="@color/darkblue"
                     android:textSize="22sp" />
 

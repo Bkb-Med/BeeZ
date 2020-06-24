@@ -1,67 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity"
-    android:background="@drawable/loginmain">
+    android:background="@drawable/main">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/lyout1"
+         android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:fontFamily="@font/sfbold"
+            android:text="Beez"
+            android:textSize="120sp"/>
+        <TextView
+            android:paddingRight="5dp"
+            android:layout_marginTop="-25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            android:textColorHighlight="@color/textGrey"
+            android:fontFamily="@font/sfregular"
+            android:text="For better looking after your apiaries"
+            android:textSize="20sp"
+            android:layout_marginBottom="150dp"/>
+    </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="330dp"
-        android:layout_height="34dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginBottom="2dp"
-            android:fontFamily="@font/sfregular"
-            android:text="@string/vous_avez_oubli_votre_mot_de_passe"
-            android:textAlignment="gravity"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <Button
+            android:id="@+id/loginbtn"
+            android:layout_width="215dp"
+            android:layout_height="51dp"
+            android:background="@drawable/shadedbutton"
+            android:text="Login"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
+            android:textAllCaps="false"
+            android:textSize="18sp"/>
 
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/registerbtn"
+            android:layout_width="215dp"
+            android:layout_height="51dp"
+            android:background="@drawable/whitebutton"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="@color/darkblue"
+            android:textSize="18sp"
+            android:layout_marginBottom="200dp"
+           />
     </LinearLayout>
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="bottom">
 
-    <Button
-        android:id="@+id/loginbtn"
-        android:layout_width="215dp"
-        android:layout_height="51dp"
-        android:background="@drawable/shadedbutton"
-        android:text="Login"
-        android:textColor="@color/colorWhite"
-        android:textAllCaps="false"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="5dp"
+        android:text="forgot your password?"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761" />
+        android:layout_marginBottom="15dp"/>
+    <TextView
+        android:clickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click here"
+        android:textColor="@color/honey1"
+        android:textSize="16sp"
+        android:layout_marginBottom="15dp"/>
 
-    <Button
-        android:id="@+id/registerbtn"
-        android:layout_width="215dp"
-        android:layout_height="51dp"
-        android:background="@drawable/whitebutton"
-        android:text="Register"
-        android:textAllCaps="false"
-        android:textColor="@color/darkblue"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginbtn"
-        app:layout_constraintVertical_bias="0.0" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+
+
+
+
+</RelativeLayout>

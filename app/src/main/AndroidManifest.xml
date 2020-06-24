@@ -35,6 +35,18 @@
         <activity
             android:name=".Dashboard"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Editapiary"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ListTemperature"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ListTraffic"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ChartActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
