@@ -63,8 +63,47 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/backlocation"
+                    android:layout_gravity="center"
+                    app:fabCustomSize="30dp"
+                    android:foregroundGravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/darkblue"
+                    app:borderWidth="0dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:elevation="10dp"
+                    app:fabSize="normal"
+                    >
+
+                </com.google.android.material.floatingactionbutton.FloatingActionButton>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lin2"
+                android:gravity="center"
+
+                android:layout_below="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_margin="5dp"
+
+                    android:id="@+id/txtaddlocation"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imgView_userIcon"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imgView_userIcon"
+                    android:background="@color/greyhoney"
+                    android:hint="Location"
+                    android:paddingLeft="20dp"
+                    android:textSize="25sp" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/addnewlocation"
                     android:layout_gravity="center"
+                    android:layout_margin="5dp"
+
                     app:fabCustomSize="30dp"
                     android:foregroundGravity="center"
                     android:layout_width="wrap_content"
@@ -77,19 +116,12 @@
                     >
 
                 </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
             </LinearLayout>
 
-
-            <ProgressBar
-                android:layout_below="@+id/linearLayout1"
-                android:id="@+id/mainProgressBar"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-
-                android:indeterminateTint="@color/honey1" />
             <RelativeLayout
                 android:id="@+id/parentlaoutlist"
-                android:layout_below="@+id/linearLayout1"
+                android:layout_below="@+id/lin2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView

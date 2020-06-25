@@ -22,7 +22,7 @@ public class MainDashboard extends AppCompatActivity {
 
     private DrawerLayout drawer;
 
-    CardView manageApp,dataViz;
+    CardView manageApp,dataViz,manageLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,15 @@ public class MainDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainDashboard.this, ListApiaries.class);
+                startActivity(intent);
+            }
+        });
+
+        manageLocation = findViewById(R.id.managelocation);
+        manageLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainDashboard.this, ListLocation.class);
                 startActivity(intent);
             }
         });

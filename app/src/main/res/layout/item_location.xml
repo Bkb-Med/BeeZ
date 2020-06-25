@@ -31,8 +31,22 @@
                 android:text="centre de la forêt"
                 android:textSize="20sp"
                 android:textColor="@color/textGrey"/>
+            <LinearLayout
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+                <Spinner
+                    android:elevation="6dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/ic_settings_aplist"
+                    android:id="@+id/locSpinner"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
         </LinearLayout>
+
 
 
 

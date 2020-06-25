@@ -3,23 +3,17 @@ package com.example.apiarymange.Adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.apiarymange.Addappiary;
 import com.example.apiarymange.Editapiary;
-import com.example.apiarymange.Interface.ILoadMore;
 import com.example.apiarymange.ListApiaries;
 import com.example.apiarymange.ListTemperature;
 import com.example.apiarymange.ListTraffic;
@@ -68,7 +62,7 @@ class ItemViewHolder extends RecyclerView.ViewHolder{
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int VIEW_TYPE_ITEM=0,VIEW_TYPE_LOADING=1;
-    public static String IdApiary;
+    //public static String IdApiary;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference("apiaries");
     Activity activity;

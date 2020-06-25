@@ -44,7 +44,7 @@ public class Addappiary extends AppCompatActivity {
         fillSpinner();
         //getting views
         appRef = (EditText) findViewById(R.id.txtreference);
-
+        buttonCancel = findViewById(R.id.btn_cancel);
         appLocation =  findViewById(R.id.txtlocation);
         appDate = (EditText) findViewById(R.id.txtDate);
         DateInputMask dtip =new DateInputMask(appDate);
@@ -62,6 +62,15 @@ public class Addappiary extends AppCompatActivity {
 
             }
         });
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Addappiary.this, ListApiaries.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
     }
     private void fillSpinner(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -72,7 +81,7 @@ public class Addappiary extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        String location = ds.getValue(String.class);
+                        String location = ds.child("name").getValue(String.class);
                         locationList.add(location);
                 }
                 if(locationList.size()>0){
