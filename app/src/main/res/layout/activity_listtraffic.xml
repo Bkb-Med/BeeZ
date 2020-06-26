@@ -104,7 +104,8 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_marginLeft="10dp"
-                    android:layout_width="135dp"
+                    android:layout_width="185dp"
+                    android:gravity="center"
                     android:text="Value"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
@@ -112,6 +113,7 @@
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_width="135dp"
+                    android:gravity="center"
                     android:text="State"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
@@ -120,6 +122,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_width="150dp"
                     android:text="Date and Time"
+                    android:gravity="right"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
                     android:textSize="18sp"/>

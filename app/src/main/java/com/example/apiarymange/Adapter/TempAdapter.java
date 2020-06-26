@@ -1,7 +1,9 @@
 package com.example.apiarymange.Adapter;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,7 @@ public class TempAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
 
+
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof TempItemViewHolder) {
@@ -64,7 +67,20 @@ public class TempAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             viewHolder.Value.setText(temperature.getTempvalue());
             viewHolder.DateandTime.setText(temperature.getTempDate() + "  " + temperature.getTempTime());
-
+            int Tempvalue = Integer.parseInt(temperature.getTempvalue());
+               if(Tempvalue<=0){
+                   viewHolder.State.setText("LOW");
+                   viewHolder.State.setBackgroundColor(Color.parseColor("#6200EE"));
+                   viewHolder.State.invalidate();
+               }else if(Tempvalue>0 && Tempvalue <=30){
+                   viewHolder.State.setText("MEDIUM");
+                   viewHolder.State.setBackgroundColor(Color.parseColor("#00bfa5"));
+                   viewHolder.State.invalidate();
+               }else if(Tempvalue>30) {
+                   viewHolder.State.setText("HIGH");
+                   viewHolder.State.setBackgroundColor(Color.parseColor("#fe104d"));
+                   viewHolder.State.invalidate();
+               }
 
         }
 

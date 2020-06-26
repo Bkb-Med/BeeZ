@@ -1,7 +1,9 @@
 package com.example.apiarymange.Adapter;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +58,7 @@ public class TrafficAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     }
 
+
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof TrafficItemViewHolder) {
@@ -67,7 +70,20 @@ public class TrafficAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             viewHolder.Value.setText(traffic.getTfvalue());
             viewHolder.DateandTime.setText(traffic.getTfDate() + "  " + traffic.getTfTime());
-
+            int Trafficvalue = Integer.parseInt(traffic.getTfvalue());
+            if(Trafficvalue<=20){
+                viewHolder.State.setText("LOW");
+                viewHolder.State.setBackgroundColor(Color.parseColor("#6200EE"));
+                viewHolder.State.invalidate();
+            }else if(Trafficvalue>20 && Trafficvalue <=100){
+                viewHolder.State.setText("MEDIUM");
+                viewHolder.State.setBackgroundColor(Color.parseColor("#00bfa5"));
+                viewHolder.State.invalidate();
+            }else if(Trafficvalue>100) {
+                viewHolder.State.setText("HIGH");
+                viewHolder.State.setBackgroundColor(Color.parseColor("#fe104d"));
+                viewHolder.State.invalidate();
+            }
 
         }
 
