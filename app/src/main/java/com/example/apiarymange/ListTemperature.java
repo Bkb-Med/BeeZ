@@ -15,6 +15,7 @@ import com.example.apiarymange.Adapter.LocationAdapter;
 import com.example.apiarymange.Adapter.TempAdapter;
 import com.example.apiarymange.Model.Temperature;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +32,7 @@ public class ListTemperature extends AppCompatActivity {
     String apref;
 
     List<Temperature> temperatures = new ArrayList<>();
-
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
     ProgressBar mainProgress;
     TempAdapter adapter;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -62,7 +63,7 @@ public class ListTemperature extends AppCompatActivity {
 
     private void setTemp(){
 
-        DatabaseReference refTemp = database.getReference("apiaries").child(apref).child("Temperature");
+        DatabaseReference refTemp = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries").child(apref).child("Temperature");
         refTemp.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

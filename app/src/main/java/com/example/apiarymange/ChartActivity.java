@@ -29,6 +29,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +43,7 @@ import java.util.List;
 
 public class ChartActivity extends AppCompatActivity {
     FloatingActionButton backbtn;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();;
     Spinner apReference;
     List<String> apiaries = new ArrayList<>();
     ArrayList<Entry> temperatures = new ArrayList<>();
@@ -108,7 +110,7 @@ public class ChartActivity extends AppCompatActivity {
 
     private void SetItemVizTemp (String Apref){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference refTemp = database.getReference("apiaries").child(Apref).child("Temperature");
+        DatabaseReference refTemp = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries").child(Apref).child("Temperature");
         final float[] i = {0};
         refTemp.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -137,7 +139,7 @@ public class ChartActivity extends AppCompatActivity {
     }
     private void SetItemVizTraffic(String Apref) {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference refTemp = database.getReference("apiaries").child(Apref).child("Traffic");
+        DatabaseReference refTemp = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries").child(Apref).child("Traffic");
         final float[] i = new float[1];
         refTemp.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -200,7 +202,7 @@ public class ChartActivity extends AppCompatActivity {
     }
     private void fillSpinner(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("apiaries");
+        DatabaseReference ref = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries");
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

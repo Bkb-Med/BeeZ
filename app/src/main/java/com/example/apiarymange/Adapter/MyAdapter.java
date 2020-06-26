@@ -23,6 +23,7 @@ import com.example.apiarymange.Model.ListFrames;
 import com.example.apiarymange.Model.Temperature;
 import com.example.apiarymange.Model.Traffic;
 import com.example.apiarymange.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -62,9 +63,9 @@ class ItemViewHolder extends RecyclerView.ViewHolder{
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int VIEW_TYPE_ITEM=0,VIEW_TYPE_LOADING=1;
-    //public static String IdApiary;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("apiaries");
+    DatabaseReference ref;
     Activity activity;
     List<Apiary> apiaries;
     List<Traffic> traffics;
@@ -77,6 +78,9 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.temperatures = temperatures;
         this.traffics = traffics;
         this.listFrames = listFrames ;
+        ref = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries");
+
+
             }
     @Override
     public int getItemViewType(int position){

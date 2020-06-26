@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apiarymange.Adapter.Post;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +34,7 @@ public class Editapiary extends AppCompatActivity {
     List<String> locationList = new ArrayList<>();
     Spinner SpLocation;
     DatabaseReference DBAppiaries;
-
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class Editapiary extends AppCompatActivity {
     }
     private void fillSpinner(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("locations");
+        DatabaseReference ref = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"locations");
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -109,7 +110,7 @@ public class Editapiary extends AppCompatActivity {
     }
     public void setApiary(final String reference){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("apiaries").child(reference);
+        DatabaseReference ref = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries").child(reference);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
@@ -130,7 +131,7 @@ public class Editapiary extends AppCompatActivity {
             }});}
 
 public void saveApiary(final String reference){
-    DBAppiaries = FirebaseDatabase.getInstance().getReference("apiaries").child(reference);
+    DBAppiaries = FirebaseDatabase.getInstance().getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries").child(reference);
 
     final String location = SpLocation.getSelectedItem().toString();
     final String date = appDate.getText().toString().trim();

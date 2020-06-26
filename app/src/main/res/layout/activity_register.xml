@@ -4,26 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:background="@drawable/dashboard"
     >
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/crdview"
-        android:layout_width="500dp"
-        android:layout_height="714dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/cardAddapiary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="17dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
-            android:id="@+id/rlcmain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -31,26 +26,25 @@
                 android:id="@+id/linearLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@color/honey1"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/circle"
-                    android:padding="10dp"
-                    android:tint="@color/white" />
+                    android:src="@drawable/user"
+                    android:padding="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="REGISTER"
-                    android:textColor="@color/white"
+                    android:text="Register"
+                    android:textColor="@color/darkblue"
                     android:textSize="22sp" />
 
             </LinearLayout>
@@ -71,29 +65,30 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView1"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginRight="30dp">
 
                 <ImageView
                     android:id="@+id/imgView_userIcon"
-                    android:layout_width="40dp"
+                    android:layout_width="5dp"
                     android:layout_height="40dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/darkblue"
                     android:padding="8dp"
 
                     android:tint="@color/white" />
 
                 <EditText
-                    android:id="@+id/fullName"
+                    android:id="@+id/fullname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/imgView_userIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imgView_userIcon"
-                    android:background="@color/editTextBG"
-                    android:hint="Username"
+                    android:background="@color/greyhoney"
+
+                    android:hint="User name"
                     android:paddingLeft="20dp"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
             </RelativeLayout>
 
@@ -109,9 +104,9 @@
 
                 <ImageView
                     android:id="@+id/imgView_passwordIcon"
-                    android:layout_width="40dp"
+                    android:layout_width="5dp"
                     android:layout_height="40dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/darkblue"
                     android:padding="8dp"
 
                     android:tint="@color/white" />
@@ -123,12 +118,10 @@
                     android:layout_alignBottom="@+id/imgView_passwordIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imgView_passwordIcon"
-                    android:background="@color/editTextBG"
+                    android:background="@color/greyhoney"
                     android:hint="Password"
-                    android:inputType="textPassword"
                     android:paddingLeft="20dp"
-                    android:textSize="15sp" />
-
+                    android:textSize="20sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -142,24 +135,25 @@
 
                 <ImageView
                     android:id="@+id/imgView_repasswordIcon"
-                    android:layout_width="40dp"
+                    android:layout_width="5dp"
                     android:layout_height="40dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/darkblue"
                     android:padding="8dp"
 
                     android:tint="@color/white" />
 
                 <EditText
+                    android:id="@+id/repassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/imgView_repasswordIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imgView_repasswordIcon"
-                    android:background="@color/editTextBG"
-                    android:hint="Re-type Password"
-                    android:inputType="textPassword"
+                    android:background="@color/greyhoney"
+                    android:hint="Re-type password"
+
                     android:paddingLeft="20dp"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
             </RelativeLayout>
 
@@ -174,66 +168,62 @@
 
                 <ImageView
                     android:id="@+id/imgView_emailIcon"
-                    android:layout_width="40dp"
+                    android:layout_width="5dp"
                     android:layout_height="40dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/darkblue"
                     android:padding="8dp"
 
                     android:tint="@color/white" />
 
                 <EditText
-                    android:id="@+id/Email"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/imgView_emailIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imgView_emailIcon"
-                    android:background="@color/editTextBG"
-                    android:hint="Email"
+                    android:background="@color/greyhoney"
+                    android:hint="email"
                     android:paddingLeft="20dp"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
             </RelativeLayout>
 
-            <CheckBox
-                android:id="@+id/chkBox1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/relativeLayout4"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="30dp"
-                android:fontFamily="sans-serif"
-                android:text="I agree to the Terms of Service"
-                android:textColor="@color/textGrey" />
 
             <Button
-                android:id="@+id/registerBtn"
-                android:layout_width="match_parent"
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/chkBox1"
+                android:layout_below="@+id/relativeLayout4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/delete_btn"
+                android:fontFamily="sans-serif"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/textGrey"
+                android:textSize="13sp" />
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativeLayout4"
+                android:layout_toRightOf="@+id/btn_cancel"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
-                android:background="@color/colorPrimary"
+                android:textAllCaps="false"
+                android:background="@drawable/edit_btn"
                 android:fontFamily="sans-serif-medium"
-                android:text="SIGN UP"
+                android:text="Add"
                 android:textColor="@color/white" />
 
 
 
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_gravity="bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:visibility="invisible" />
-        </RelativeLayout>
-       </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

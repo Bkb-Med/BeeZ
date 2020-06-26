@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apiarymange.Adapter.TrafficAdapter;
 import com.example.apiarymange.Model.Traffic;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +29,7 @@ public class ListTraffic extends AppCompatActivity {
     FloatingActionButton backbtn;
     TextView viewrefrence;
     String apref;
-
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
     List<Traffic> traffics = new ArrayList<>();
 
     ProgressBar mainProgress;
@@ -61,7 +62,7 @@ public class ListTraffic extends AppCompatActivity {
 
     private void setTemp(){
 
-        DatabaseReference refTemp = database.getReference("apiaries").child(apref).child("Traffic");
+        DatabaseReference refTemp = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries").child(apref).child("Traffic");
         refTemp.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

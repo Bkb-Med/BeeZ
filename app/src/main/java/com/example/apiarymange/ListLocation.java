@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apiarymange.Adapter.LocationAdapter;
 import com.example.apiarymange.Model.Location;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +32,7 @@ public class ListLocation extends AppCompatActivity {
     FloatingActionButton back, addnewloc;
     EditText txtloc;
     List<Location> locations = new ArrayList<>();
-
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
     ProgressBar mainProgress;
     LocationAdapter adapter;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -63,7 +64,7 @@ public class ListLocation extends AppCompatActivity {
     }
 
     public void Addlocation(){
-        final DatabaseReference ref = database.getReference("locations");
+        final DatabaseReference ref = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"locations");
         final String loc = txtloc.getText().toString().trim();
 
         if (!TextUtils.isEmpty(loc)) {
@@ -103,7 +104,7 @@ public class ListLocation extends AppCompatActivity {
     }
     private void setLocation() {
 
-        DatabaseReference refTemp = database.getReference("locations");
+        DatabaseReference refTemp = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"locations");
         refTemp.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

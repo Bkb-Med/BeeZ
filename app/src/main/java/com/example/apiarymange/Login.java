@@ -36,7 +36,10 @@ public class Login extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         mLoginBtn = findViewById(R.id.loginbutton);
-
+      /* if(fAuth.getCurrentUser() != null){
+                startActivity(new Intent(getApplicationContext(),MainDashboard.class));
+                finish();
+            }*/
 
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +73,8 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), ListApiaries.class));
+                            startActivity(new Intent(getApplicationContext(), MainDashboard.class));
+                            finish();
                         }else {
                             Toast.makeText(Login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 

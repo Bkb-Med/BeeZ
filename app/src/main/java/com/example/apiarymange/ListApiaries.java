@@ -23,6 +23,7 @@ import com.example.apiarymange.Model.ListFrames;
 import com.example.apiarymange.Model.Temperature;
 import com.example.apiarymange.Model.Traffic;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +36,7 @@ import java.util.List;
 
 public class ListApiaries extends AppCompatActivity{
     FloatingActionButton btnAddnewApiary,btnSync;
-
+    FirebaseAuth fAuth;
 
     List<Apiary> apiaries = new ArrayList<>();
     List<Temperature> temperatures = new ArrayList<>();
@@ -44,13 +45,16 @@ public class ListApiaries extends AppCompatActivity{
     ProgressBar mainProgress;
     MyAdapter adapter;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("apiaries");
+    DatabaseReference ref ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listapiaries);
+
+        fAuth = FirebaseAuth.getInstance();
+        ref = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries");
         mainProgress = (ProgressBar) findViewById(R.id.mainProgressBar);
        setTemp();
        setTraffics();
@@ -98,7 +102,7 @@ public class ListApiaries extends AppCompatActivity{
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     apReference[0] = ds.getKey();
                     final Temperature[] temp = new Temperature[1];
-                    DatabaseReference refTemp = database.getReference("apiaries").child(apReference[0]).child("Temperature");
+                    DatabaseReference refTemp = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries").child(apReference[0]).child("Temperature");
                     refTemp.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(DataSnapshot ds, String s) {
@@ -155,7 +159,7 @@ public class ListApiaries extends AppCompatActivity{
                     apReference[0] = ds.getKey();
 
                     final Traffic[] tf = new Traffic[1];
-                    DatabaseReference refTrf = database.getReference("apiaries").child(apReference[0]).child("Traffic");
+                    DatabaseReference refTrf = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries").child(apReference[0]).child("Traffic");
                     refTrf.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(DataSnapshot ds, String s) {
@@ -214,7 +218,7 @@ public class ListApiaries extends AppCompatActivity{
                     String Time = ds.child("apTime").getValue(String.class);
                     apiaries.add(new Apiary(location, Id, apReference[0], Date, Time));
 
-                    DatabaseReference refTrf = database.getReference("apiaries").child(apReference[0]).child("frames");
+                    DatabaseReference refTrf = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries").child(apReference[0]).child("frames");
                     refTrf.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(DataSnapshot ds, String s) {
@@ -287,30 +291,3 @@ public class ListApiaries extends AppCompatActivity{
 }
 
 
-       /* adapter.setLoadMore(new ILoadMore() {
-            @Override
-            public void OnLoadMore() {
-                if(items.size()<=50){
-                    adapter.notifyItemInserted(items.size()-1);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            items.remove(items.size()-1);
-                            adapter.notifyItemRemoved(items.size());
-
-                            int index = items.size();
-                            int end = index + 10;
-                            for(int i=index;i<end;i++){
-                                String name = "APX023XDF";
-                                Item item = new Item(name,name.length());
-                                items.add(item);
-                            }
-                            adapter.notifyDataSetChanged();
-                            adapter.setLoaded();
-                        }
-                    },1000);
-                }else{
-                    Toast.makeText(ListApp.this,"Load data completed !",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/

@@ -14,6 +14,7 @@ import com.example.apiarymange.Adapter.Post;
 import com.example.apiarymange.Model.Apiary;
 import com.example.apiarymange.Model.Location;
 import com.example.apiarymange.Model.Temperature;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +30,7 @@ import java.util.Map;
 public class Addappiary extends AppCompatActivity {
 
     EditText appRef,appDate,appTime;
-
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();;
     Spinner appLocation;
     Button buttonAdd,buttonCancel;
     List<String> locationList = new ArrayList<>();
@@ -74,7 +75,7 @@ public class Addappiary extends AppCompatActivity {
     }
     private void fillSpinner(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("locations");
+        DatabaseReference ref = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"locations");
 
         locationList.add("Location :");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -115,7 +116,7 @@ public class Addappiary extends AppCompatActivity {
     }
 
     private void addAppiary() {
-        DBAppiaries = FirebaseDatabase.getInstance().getReference("apiaries");
+        DBAppiaries = FirebaseDatabase.getInstance().getReference(fAuth.getCurrentUser().getUid()+"/"+"apiaries");
         final String reference = appRef.getText().toString().trim();
         final String location = appLocation.getSelectedItem().toString();
         final String date = appDate.getText().toString().trim();
