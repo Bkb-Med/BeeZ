@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:background="@drawable/dashboard"
     >
 
     <androidx.cardview.widget.CardView
-        android:layout_width="500dp"
-        android:layout_height="714dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/cardAddapiary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="17dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="false"
@@ -33,13 +30,24 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/agentmanaging"
-                    android:padding="10dp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_agent"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/user"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="1dp" />
 
+                <ImageView
+                    android:id="@+id/addimage"
+                    android:clickable="true"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="-50dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/addphoto"
+                    android:padding="10dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,10 +95,11 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imgView_userIcon"
                     android:background="@color/greyhoney"
-
-                    android:hint="Reference"
+                    android:id="@+id/agentFname"
+                    android:hint="Full name"
                     android:paddingLeft="20dp"
                     android:textSize="20sp" />
+
 
             </RelativeLayout>
 
@@ -120,7 +129,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imgView_passwordIcon"
                     android:background="@color/greyhoney"
-                    android:hint="Location"
+                    android:id="@+id/agentAdresse"
+                    android:hint="Adresse"
                     android:paddingLeft="20dp"
                     android:textSize="20sp" />
 
@@ -151,10 +161,12 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imgView_repasswordIcon"
                     android:background="@color/greyhoney"
-                    android:hint="Establishing date"
-                    android:inputType="date"
+                    android:id="@+id/agentEmail"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
                     android:paddingLeft="20dp"
                     android:textSize="20sp" />
+
 
             </RelativeLayout>
 
@@ -175,7 +187,6 @@
                     android:padding="8dp"
 
                     android:tint="@color/white" />
-
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,16 +194,17 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imgView_emailIcon"
                     android:background="@color/greyhoney"
-                    android:hint="Time"
-                    android:inputType="datetime"
+                    android:hint="Phone"
+                    android:id="@+id/phoneagent"
+                    android:inputType="phone"
                     android:paddingLeft="20dp"
                     android:textSize="20sp" />
-
             </RelativeLayout>
 
 
+
             <Button
-                android:id="@+id/btn_cadddcel"
+                android:id="@+id/btn_cancelagent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relativeLayout4"
@@ -206,11 +218,11 @@
                 android:textColor="@color/textGrey"
                 android:textSize="13sp" />
             <Button
-                android:id="@+id/btn_Add"
+                android:id="@+id/btn_Addagent"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relativeLayout4"
-                android:layout_toRightOf="@+id/btn_cadddcel"
+                android:layout_toRightOf="@+id/btn_cancelagent"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
@@ -221,7 +233,19 @@
                 android:textColor="@color/white" />
 
 
-
+            <ProgressBar
+                android:layout_below="@id/btn_Addagent"
+                android:id="@+id/prgsaddagent"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:progressDrawable="@drawable/progress_tint"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="5dp"
+                android:progress="0"
+                android:scaleY="1"
+                />
         </RelativeLayout>
 
 

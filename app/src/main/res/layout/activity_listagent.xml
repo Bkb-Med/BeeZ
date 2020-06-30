@@ -56,7 +56,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/btnbacklayoutTraffic"
+                android:id="@+id/btnbacklayoutagent"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_below="@+id/linearLayout1"
@@ -68,7 +68,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/backTraffic"
+                    android:id="@+id/addagent"
                     android:layout_gravity="center"
                     app:fabCustomSize="30dp"
                     android:foregroundGravity="center"
@@ -83,16 +83,45 @@
 
                 </com.google.android.material.floatingactionbutton.FloatingActionButton>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btnback"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/linearLayout1"
+                android:layout_toLeftOf="@+id/btnbacklayoutagent"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="-60dp"
+                android:padding="5dp"
+                android:background="@drawable/whitecircle"
+                android:orientation="horizontal">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/backbtn"
+                    android:layout_gravity="center"
+                    app:fabCustomSize="30dp"
+                    android:foregroundGravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/darkblue"
+                    app:borderWidth="0dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:elevation="10dp"
+                    app:fabSize="normal"
+                    >
+
+                </com.google.android.material.floatingactionbutton.FloatingActionButton>
+            </LinearLayout>
 
 
             <ProgressBar
                 android:visibility="gone"
-                android:layout_below="@+id/menulayoutTraffic"
-                android:id="@+id/mainProgressBarTemp"
+                android:layout_below="@+id/linearLayout1"
+                android:id="@+id/lsProgressBaragent"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
 
                 android:indeterminateTint="@color/honey1" />
+
             <RelativeLayout
                 android:id="@+id/parentlaoutlistTraffic"
                 android:layout_below="@+id/linearLayout1"

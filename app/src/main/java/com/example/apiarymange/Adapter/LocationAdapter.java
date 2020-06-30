@@ -2,7 +2,9 @@ package com.example.apiarymange.Adapter;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +14,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.apiarymange.ListAgent;
 import com.example.apiarymange.ListLocation;
 import com.example.apiarymange.ListTemperature;
 import com.example.apiarymange.Model.Location;
 import com.example.apiarymange.Model.Temperature;
 import com.example.apiarymange.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -38,9 +43,9 @@ class LocationItemViewHolder extends RecyclerView.ViewHolder{
     }
 }
 public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("locations");
+    DatabaseReference ref = database.getReference(fAuth.getCurrentUser().getUid()+"/"+"locations");
     Activity activity;
     List<Location> locations;
     EditText txtloc;
@@ -77,12 +82,8 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 idLoc = location.getId();
                             break;
                         case 2:
-                            System.out.println("id::"+location.getId());
-                            ref.child( location.getId()).removeValue();
-                            Toast.makeText(activity.getApplicationContext(), "Locations successfully removed ", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(activity.getApplicationContext(), ListLocation.class);
-                            activity.startActivity(intent);
-                            activity.finish();
+                            showDialog( location.getId());
+
                              break;}
 
                 }
@@ -118,6 +119,40 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public int getItemCount() {
         return  locations.size();
     }
+    /**
+     * @throws Resources.NotFoundException
+     */
+    private void showDialog(final String agentid) throws Resources.NotFoundException {
+        new AlertDialog.Builder(activity)
+                .setTitle("Confirmation")
+                .setMessage(
+                        "Do you really want to remove this Location?")
+                .setIcon(
+                        activity.getResources().getDrawable(
+                                android.R.drawable.ic_dialog_alert))
+                .setPositiveButton(
+                        android.R.string.yes,
+                        new DialogInterface.OnClickListener() {
 
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                ref.child( agentid).removeValue();
+                                Toast.makeText(activity.getApplicationContext(), "Location successfully removed ", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(activity.getApplicationContext(), ListLocation.class);
+                                activity.startActivity(intent);
+                                activity.finish();
+                            }
+                        })
+                .setNegativeButton(
+                        android.R.string.no,
+                        new DialogInterface.OnClickListener() {
 
-}
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                //Do Something Here
+                            }
+                        }).show();
+    }}
+

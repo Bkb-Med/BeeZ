@@ -2,7 +2,9 @@ package com.example.apiarymange.Adapter;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.apiarymange.Editapiary;
 import com.example.apiarymange.ListApiaries;
@@ -128,11 +132,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                              activity.finish();
                              break;
                          case 4:
-                             ref.child(apiary.getAppReference()).removeValue();
-                             Toast.makeText(activity.getApplicationContext(), "Apiary successfully removed ", Toast.LENGTH_LONG).show();
-                             Intent intent = new Intent(activity.getApplicationContext(), ListApiaries.class);
-                             activity.startActivity(intent);
-                             activity.finish();
+                             showDialog(apiary.getAppReference());
                              break;
                      }
 
@@ -198,50 +198,43 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemCount() {
         return apiaries.size();
     }
-  /*  private void setSpinner( ItemViewHolder viewHolder){
-        // Spinner click listener
-        viewHolder.apSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                //String ASIN = gameDataArr.get(position).getAmazonId();
-                System.out.println(parent.getId());     // <--- prints the same value for each item.
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+    /**
+     * @throws Resources.NotFoundException
+     */
+    private void showDialog(final String refap) throws Resources.NotFoundException {
+        new AlertDialog.Builder(activity)
+                .setTitle("Confirmation")
+                .setMessage(
+                        "Do you really want to remove this agent?")
+                .setIcon(
+                        activity.getResources().getDrawable(
+                                android.R.drawable.ic_dialog_alert))
+                .setPositiveButton(
+                        android.R.string.yes,
+                        new DialogInterface.OnClickListener() {
 
-            }
-        });
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                ref.child(refap).removeValue();
+                                Toast.makeText(activity.getApplicationContext(), "Apiary successfully removed ", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(activity.getApplicationContext(), ListApiaries.class);
+                                activity.startActivity(intent);
+                                activity.finish();
+                            }
+                        })
+                .setNegativeButton(
+                        android.R.string.no,
+                        new DialogInterface.OnClickListener() {
 
-        ArrayList<CustomItemSpinner> customList;
-        customList = new ArrayList<>();
-        customList.add(new CustomItemSpinner("Actions", R.drawable.ic_settings_aplist));
-        customList.add(new CustomItemSpinner("Temp history", R.drawable.ic_temp));
-        customList.add(new CustomItemSpinner("Traffic history", R.drawable.ic_traffic));
-
-        SpinnerAdapter adapter = new SpinnerAdapter(activity.getApplicationContext(), customList);
-        viewHolder.apSpinner.setAdapter(adapter);
-        // Spinner Drop down elements
-
-    }*/
-/*
-             cardViewList.add(((ItemViewHolder) holder).parentLayout);
-             ((ItemViewHolder) holder).parentLayout.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View view) {
-                     for(RelativeLayout cardView : cardViewList){
-                         cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                     }
-                     //The selected card is set to colorSelected
-                     ((ItemViewHolder) holder).parentLayout.setBackgroundColor(Color.parseColor("#ededed"));
-                     Apiary apiary = apiaries.get(position);
-                     IdApiary = apiary.getAppReference();
-
-                     LinearLayout menuLayout =  (LinearLayout) activity.findViewById(R.id.menulayout);
-                      menuLayout.setVisibility(view.VISIBLE);
-
-
-
-                 }
-             });*/
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                //Do Something Here
+                            }
+                        }).show();
+    }
 }
+
+
