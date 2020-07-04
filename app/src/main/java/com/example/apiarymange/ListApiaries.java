@@ -132,7 +132,7 @@ public class ListApiaries extends AppCompatActivity{
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            mainProgress.setVisibility(View.GONE);
+
                         }
                     });
 
@@ -143,7 +143,7 @@ public class ListApiaries extends AppCompatActivity{
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                mainProgress.setVisibility(View.GONE);
+
             }
 
         });
@@ -189,7 +189,7 @@ public class ListApiaries extends AppCompatActivity{
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            mainProgress.setVisibility(View.GONE);
+
                         }
                     });
 
@@ -200,7 +200,7 @@ public class ListApiaries extends AppCompatActivity{
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                mainProgress.setVisibility(View.GONE);
+
             }
         });
     }
@@ -265,7 +265,7 @@ public class ListApiaries extends AppCompatActivity{
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            mainProgress.setVisibility(View.GONE);
+
                         }
                     });
 

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 
+import com.example.apiarymange.Adapter.MyPasswordTransformationMethod;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -33,15 +34,15 @@ public class Login extends AppCompatActivity {
 
         mEmail = findViewById(R.id.txtEmail);
         mPassword = findViewById(R.id.txtpassword);
-
+        mPassword.setTransformationMethod(new MyPasswordTransformationMethod());
         fAuth = FirebaseAuth.getInstance();
         mLoginBtn = findViewById(R.id.loginbutton);
-        //---------------
+       //---------------
       if(fAuth.getCurrentUser() != null){
                 startActivity(new Intent(getApplicationContext(),MainDashboard.class));
                 finish();
             }
-//--------------------
+//--------------------*/
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,4 +92,5 @@ public class Login extends AppCompatActivity {
 
 
     }
+
 }

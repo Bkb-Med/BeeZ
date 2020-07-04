@@ -35,38 +35,23 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/ic_temp" />
-                <LinearLayout
-                    android:orientation="vertical"
+                    android:src="@drawable/marker" />
+
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Locations"
+                    android:textColor="@color/white"
+                    android:textSize="28sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="Temperature"
-                        android:textColor="@color/white"
-                        android:textSize="28sp" />
-
-                    <TextView
-                        android:id="@+id/aprefrenceTemp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginBottom="5dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="AP0001"
-                        android:textColor="@color/textGrey"
-                        android:textSize="18sp" />
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/btnbacklayoutTemp"
+                android:id="@+id/btnlayout"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_below="@+id/linearLayout1"
@@ -78,7 +63,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/backTemp"
+                    android:id="@+id/backlocation"
                     android:layout_gravity="center"
                     app:fabCustomSize="30dp"
                     android:foregroundGravity="center"
@@ -93,56 +78,72 @@
 
                 </com.google.android.material.floatingactionbutton.FloatingActionButton>
             </LinearLayout>
-
             <LinearLayout
-                android:visibility="visible"
-                android:layout_marginTop="5dp"
-                android:id="@+id/menulayoutTemp"
+                android:id="@+id/lin2"
+                android:gravity="center"
+                android:background="@color/transparent"
                 android:layout_below="@+id/linearLayout1"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="120dp"
-                    android:text="Value"
-                    android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:textSize="18sp"/>
-                <TextView
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="130dp"
-                    android:text="State"
-                    android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:textSize="18sp"/>
-                <TextView
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_margin="5dp"
 
-                    android:layout_width="150dp"
-                    android:text="Date and Time"
+                    android:id="@+id/txtaddloc"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:textSize="18sp"/>
+                    android:layout_alignBottom="@+id/imgView_userIcon"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imgView_userIcon"
+                    android:background="@color/greyhoney"
+                    android:hint="Location"
+                    android:paddingLeft="20dp"
+                    android:textSize="25sp" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/addnewlocation"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    app:fabCustomSize="30dp"
+                    android:foregroundGravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/darkblue"
+                    app:borderWidth="0dp"
+                    android:src="@drawable/ic_add_ap"
+                    android:elevation="10dp"
+                    app:fabSize="normal"
+                    />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/dellocation"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    app:fabCustomSize="30dp"
+                    android:foregroundGravity="center"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:backgroundTint="@color/white"
+                    app:borderWidth="0dp"
+                    android:src="@drawable/ic_delete"
+                    android:elevation="10dp"
+                    app:fabSize="normal"
+                    />
 
             </LinearLayout>
-            <ProgressBar
-                android:visibility="gone"
-                android:layout_below="@+id/menulayoutTemp"
-                android:id="@+id/mainProgressBarTemp"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
 
-                android:indeterminateTint="@color/honey1" />
             <RelativeLayout
-                android:id="@+id/parentlaoutlistTemp"
-                android:layout_below="@+id/menulayoutTemp"
+                android:id="@+id/parentlaoutlist"
+                android:layout_below="@+id/lin2"
+                android:gravity="bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerTemp"
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    tools:ignore="MissingConstraints" />
             </RelativeLayout>
 
 

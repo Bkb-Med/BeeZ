@@ -80,7 +80,7 @@ public class Editapiary extends AppCompatActivity {
                     locationList.add(location);
                 }
                 if(locationList.size()>0){
-                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, locationList){
+                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_items_location, locationList){
                         // Disable click item < month current
                         @Override
                         public boolean isEnabled(int position) {
@@ -91,7 +91,7 @@ public class Editapiary extends AppCompatActivity {
                             return true;
                         }};
 
-                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    dataAdapter.setDropDownViewResource(R.layout.spinner_items_location);
 
 
                     SpLocation.setAdapter(dataAdapter);}

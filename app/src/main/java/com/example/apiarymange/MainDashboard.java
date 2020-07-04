@@ -60,7 +60,7 @@ public class MainDashboard extends AppCompatActivity {
         manageLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainDashboard.this, ListLocation.class);
+                Intent intent = new Intent(MainDashboard.this, Locations.class);
                 startActivity(intent);
             }
         });

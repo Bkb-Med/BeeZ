@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:gravity="center|left"
             android:layout_height="match_parent">
             <TextView

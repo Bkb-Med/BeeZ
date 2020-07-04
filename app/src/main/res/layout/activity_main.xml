@@ -16,6 +16,7 @@
         android:orientation="vertical"
         android:id="@+id/lyout1"
          android:gravity="center"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -36,6 +37,7 @@
             android:fontFamily="@font/sfregular"
             android:text="For better looking after your apiaries"
             android:textSize="20sp"
+            android:id="@+id/txtmotivation"
             android:layout_marginBottom="150dp"/>
     </LinearLayout>
     </LinearLayout>
@@ -46,12 +48,14 @@
 
 
     <LinearLayout
+
         android:orientation="vertical"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
         <Button
+
             android:id="@+id/loginbtn"
             android:layout_width="215dp"
             android:layout_height="51dp"
@@ -71,7 +75,7 @@
             android:textAllCaps="false"
             android:textColor="@color/darkblue"
             android:textSize="18sp"
-            android:layout_marginBottom="200dp"
+            android:layout_marginBottom="100dp"
            />
     </LinearLayout>
     </LinearLayout>
